@@ -5,6 +5,10 @@ class Pumpkin(turtle.Turtle):
     Draws a pumpkin in a window using the turtle library.
     """
 
+    def __init__(self):
+        super().__init__()
+        self.ht()
+
     def set_to_point(self, x, y):
         """Lifts the pen from canvas and moves to the designated coordinate"""
         self.penup()
@@ -63,35 +67,68 @@ class Pumpkin(turtle.Turtle):
         """
         for xcoord in (-30, 50):
             self.set_to_point(xcoord, -70)
-            self.draw_eye()
+            self.draw_filled_triangle()
         return self
 
-    def draw_eye(self):
+    def draw_nose(self):
+        self.set_to_point(10, -120)
+        self.draw_filled_triangle()
+        return self
+
+    def draw_filled_triangle(self):
         """Draws a single equilateral triangle, filled with black"""
         self.pen(
             pencolor="black",
             fillcolor="black",
             pensize=10
         )
-        def draw_eye_segment():
+        def draw_segment():
             """Draws a single segment of the eye and reorients the turtle"""
             self.forward(30)
             self.left(120)
         self.begin_fill()
         for i in range(3):
-            draw_eye_segment()
+            draw_segment()
         self.end_fill()
+        return self
+
+    def draw_left_curve(self, x_limit, curve="left"):
+        while self.xcor() < x_limit:
+            self.forward(1)
+            self.left(1)
+        self.right(1)
+
+    def draw_mouth(self):
+        self.pen(
+            pencolor='black',
+            fillcolor='black',
+            pensize=10
+        )
+
+        self.set_to_point(-30, -140)
+        self.right(45)
+        self.draw_left_curve(15)
+        self.forward(35)
+        self.draw_left_curve(80)
+        return self
+
+    def manual_control(self):
+        self.st()
         return self
 
 def main():
     s = turtle.getscreen()
     turtle.bgcolor("black")
-    pumpkin1 = Pumpkin()
-    (pumpkin1
+    pumpkin = Pumpkin()
+    (pumpkin
         .draw_body()
         .draw_stem()
         .draw_eyes()
+        .draw_nose()
+        .draw_mouth()
     )
+    t = pumpkin.manual_control()
+    breakpoint()
     input()
 
 if __name__ == "__main__":
