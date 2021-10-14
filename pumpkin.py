@@ -128,7 +128,6 @@ def main():
         .draw_mouth()
     )
     t = pumpkin.manual_control()
-    breakpoint()
     input()
 
 if __name__ == "__main__":
