@@ -102,7 +102,8 @@ class Pumpkin(turtle.Turtle):
         self.pen(
             pencolor='black',
             fillcolor='black',
-            pensize=10
+            pensize=10,
+            speed=0
         )
 
         self.set_to_point(-30, -140)
